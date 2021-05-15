@@ -1,0 +1,17 @@
+name: build
+on: [push]
+jobs:
+  build:
+    strategy:
+      matrix:
+          vs: [vs16, vc15]
+          arch: [x64, x86]
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v2
+      - uses: microsoft/setup-msbuild@v1.0.2
+      - run: ./.github/workflows/build.ps1 -vs ${{matrix.vs}} -arch ${{matrix.arch}}
+      - uses: actions/upload-artifact@v2
+        with:
+          name: libiconv-1.16-4-${{matrix.vs}}-${{matrix.arch}}
+          path: ./winlib_build/
