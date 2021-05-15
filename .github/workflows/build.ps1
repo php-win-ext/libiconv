@@ -18,8 +18,8 @@ if ($arch -eq "x86") {
 }
 
 Set-Location $slndir
-msbuild /t:Rebuild /p:Configuration=Release /p:Platform=$platform libiconv.sln
-msbuild /t:Rebuild /p:Configuration=Debug /p:Platform=$platform libiconv.sln
+msbuild /t:Rebuild /p:Configuration=Release /p:Platform=$platform /p:WindowsTargetPlatformVersion=10.0 libiconv.sln
+msbuild /t:Rebuild /p:Configuration=Debug /p:Platform=$platform /p:WindowsTargetPlatformVersion=10.0 libiconv.sln
 
 Set-Location ..
 New-Item winlib_build\bin -ItemType directory
